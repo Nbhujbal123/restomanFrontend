@@ -1,0 +1,42 @@
+.admin-navbar {
+  height: 56px;
+  transition: left 0.3s ease, width 0.3s ease;
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .admin-navbar.sidebar-expanded {
+    left: 256px;
+    width: calc(100% - 256px);
+  }
+
+  .admin-navbar.sidebar-collapsed {
+    left: 80px;
+    width: calc(100% - 80px);
+  }
+
+  .admin-brand.hidden {
+    display: none;
+  }
+}
+
+.admin-main {
+  background-color: #f8f9fa;
+  color: #212529;
+  min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  .admin-main.sidebar-expanded {
+    margin-left: 256px;
+  }
+  .admin-main.sidebar-collapsed {
+    margin-left: 80px;
+  }
+}
