@@ -44,7 +44,7 @@ useEffect(() => {
   const fetchOrders = async () => {
     console.log('Fetching orders from admin dashboard');
     try {
-      const response = await fetch('http://localhost:5000/api/orders');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`);
       console.log('Fetch response status:', response.status);
       if (response.ok) {
         const data = await response.json();
@@ -74,7 +74,7 @@ const completedOrders = localOrders.filter(o => o.orderStatus === 'DELIVERED').l
 
 const updateOrderStatus = async (orderId: string, status: 'PENDING' | 'PREPARING' | 'OUT FOR DELIVERY' | 'DELIVERED') => {
   try {
-    const response = await fetch(`http://localhost:5000/api/orders/${orderId}/status`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders/${orderId}/status`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

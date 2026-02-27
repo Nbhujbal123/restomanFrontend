@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import api from '../../utils/api'
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaPhone, FaChevronLeft } from 'react-icons/fa'
-
-const API_BASE_URL = 'http://localhost:5000/api/auth'
 
 interface SignupProps {
   onClose: () => void
@@ -169,7 +167,7 @@ const Signup: React.FC<SignupProps> = ({ onClose, onSwitchToLogin, onSignup }) =
     if (!validateForm()) return
     setIsLoading(true)
     try {
-      const res = await axios.post(`${API_BASE_URL}/signup`, formData)
+      const res = await api.post('/api/auth/signup', formData)
       alert(res.data.message || 'OTP sent to your email')
       setShowOTPVerification(true)
     } catch (err: any) {
@@ -181,7 +179,7 @@ const Signup: React.FC<SignupProps> = ({ onClose, onSwitchToLogin, onSignup }) =
 
   const handleOTPVerify = async (otp: string) => {
     try {
-      const res = await axios.post(`${API_BASE_URL}/verify-otp`, {
+      const res = await api.post('/api/auth/verify-otp', {
         email: formData.email,
         otp,
       })
@@ -195,7 +193,7 @@ const Signup: React.FC<SignupProps> = ({ onClose, onSwitchToLogin, onSignup }) =
 
   const handleOTPResend = async () => {
     try {
-      const res = await axios.post(`${API_BASE_URL}/signup`, formData)
+      const res = await api.post('/api/auth/signup', formData)
       alert(res.data.message || 'OTP resent to your email')
     } catch (err: any) {
       alert(err.response?.data?.message || 'Failed to resend OTP')

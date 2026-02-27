@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import api from '../../utils/api'
 import { FaUser, FaLock, FaEye, FaEyeSlash, FaShoppingCart, FaArrowLeft } from 'react-icons/fa'
-
-const API_BASE_URL = 'http://localhost:5000/api/auth'
 
 interface LoginProps {
   onClose: () => void
@@ -41,7 +39,7 @@ const Login: React.FC<LoginProps> = ({ onClose, onSwitchToSignup, onLogin }) => 
     e.preventDefault()
     setResetLoading(true)
     try {
-      const res = await axios.post(`${API_BASE_URL}/forgot-password`, { email: resetEmail })
+      const res = await api.post('/api/auth/forgot-password', { email: resetEmail })
       alert(res.data.message || 'OTP sent to your email')
       setShowForgotPassword(false)
       setShowOTPVerification(true)
@@ -56,7 +54,7 @@ const Login: React.FC<LoginProps> = ({ onClose, onSwitchToSignup, onLogin }) => 
     e.preventDefault()
     setResetLoading(true)
     try {
-      const res = await axios.post(`${API_BASE_URL}/verify-reset-otp`, { email: resetEmail, otp })
+      const res = await api.post('/api/auth/verify-reset-otp', { email: resetEmail, otp })
       alert(res.data.message || 'OTP verified')
       setShowOTPVerification(false)
       setShowPasswordReset(true)
@@ -75,7 +73,7 @@ const Login: React.FC<LoginProps> = ({ onClose, onSwitchToSignup, onLogin }) => 
     }
     setResetLoading(true)
     try {
-      const res = await axios.post(`${API_BASE_URL}/reset-password`, { email: resetEmail, newPassword })
+      const res = await api.post('/api/auth/reset-password', { email: resetEmail, newPassword })
       alert(res.data.message || 'Password reset successfully')
       setShowPasswordReset(false)
       setResetEmail('')

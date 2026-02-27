@@ -39,7 +39,7 @@ const MenuManagement: React.FC = () => {
   useEffect(() => {
     const fetchMenuItems = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/menu')
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/menu`)
         if (response.ok) {
           const data = await response.json()
           setLocalMenuItems(data)
@@ -81,7 +81,7 @@ const MenuManagement: React.FC = () => {
 
     try {
       if (editingItem) {
-        const response = await fetch(`http://localhost:5000/api/menu/${editingItem.id}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/menu/${editingItem.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
@@ -103,7 +103,7 @@ const MenuManagement: React.FC = () => {
           id: Math.max(0, ...localMenuItems.map(item => item.id)) + 1,
           foodType: formData.foodType // from form
         }
-        const response = await fetch('http://localhost:5000/api/menu', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/menu`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newItemData)
@@ -136,7 +136,7 @@ type MenuItem = {
 const handleDelete = async (id: number) => {
   if (window.confirm('Are you sure you want to delete this item?')) {
     try {
-      const response = await fetch(`http://localhost:5000/api/menu/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/menu/${id}`, {
         method: 'DELETE'
       })
       if (response.ok) {

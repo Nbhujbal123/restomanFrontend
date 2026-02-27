@@ -44,7 +44,7 @@ const Billing: React.FC = () => {
     const fetchBills = async () => {
       console.log('Frontend: Fetching unpaid bills...');
       try {
-        const response = await fetch('http://localhost:5000/api/bills/unpaid');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/bills/unpaid`);
         console.log('Frontend: API response status:', response.status);
         if (response.ok) {
           const data = await response.json();
@@ -70,7 +70,7 @@ const Billing: React.FC = () => {
 
   const handleMarkAsPaid = async (billId: string) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/bills/pay/${billId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/bills/pay/${billId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

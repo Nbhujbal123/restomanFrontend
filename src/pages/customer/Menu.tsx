@@ -53,7 +53,7 @@ const Menu: React.FC = () => {
   useEffect(() => {
     const fetchMenuItems = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/menu')
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/menu`)
         if (response.ok) {
           const data = await response.json()
           setMenuItems(data)

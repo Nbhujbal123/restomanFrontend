@@ -53,7 +53,7 @@ const Profile: React.FC = () => {
       console.log('Fetching data for user:', userId)
       if (userId) {
         // Fetch orders
-        fetch(`http://localhost:5000/api/orders/user/${userId}`)
+        fetch(`${import.meta.env.VITE_API_URL}/api/orders/user/${userId}`)
           .then(res => res.json())
           .then(data => {
             console.log('Fetched orders data:', data)
@@ -62,7 +62,7 @@ const Profile: React.FC = () => {
           .catch(err => console.error('Error fetching orders:', err))
 
         // Fetch paid bills
-        fetch(`http://localhost:5000/api/bills/paid/${userId}`)
+        fetch(`${import.meta.env.VITE_API_URL}/api/bills/paid/${userId}`)
           .then(res => res.json())
           .then(data => {
             console.log('Fetched paid bills data:', data)
